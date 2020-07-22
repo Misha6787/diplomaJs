@@ -11,7 +11,7 @@ const openModalGift = () => {
     };
     const closeModal = event => {
         const target = event.target;
-        if (!target.closest('.form-wrapper') || target.closest('.close_icon')) {
+        if (!target.closest('.form-wrapper') || target.closest('.close_icon') || target.closest('.close-btn')) {
             gift.style.display = 'none';
         }
     };
