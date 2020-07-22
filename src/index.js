@@ -2,13 +2,17 @@
 // 'use strict';
 
 import chooseClub from './modules/chooseClub.js';
-import openFreeVisitForm from './modules/openFreeVisitForm.js';
-import openCallbackForm from './modules/openCallbackForm.js';
+import openFreeVisitForm from './modules/openFreeVisitCallBackForms.js';
 import openModalGift from './modules/openModalGift.js';
 import mainSlider from './modules/mainSlider.js';
 
+let countError;
+
 chooseClub();
 openFreeVisitForm();
-openCallbackForm();
-openModalGift();
+try {
+    openModalGift();
+} catch {
+    countError + 1;
+}
 mainSlider();
