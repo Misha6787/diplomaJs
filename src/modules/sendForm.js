@@ -84,7 +84,6 @@ const sendForm = () => {
         }
         validation();
     };
-
     document.body.addEventListener('keyup', validinput);
     document.body.addEventListener('focusout', validinput);
 
