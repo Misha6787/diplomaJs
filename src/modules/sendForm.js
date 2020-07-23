@@ -3,7 +3,6 @@
 const sendForm = () => {
     const loadMessage = document.createElement('div'),
         successMessage = `Ваша заявка отправлена. 
-        <br>
         Мы свяжемся с вами в ближайшее время.
         `,
         errorMessage = 'Ошибка',
