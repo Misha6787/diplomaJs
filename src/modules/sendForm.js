@@ -29,7 +29,8 @@ const sendForm = () => {
             },
             body: JSON.stringify(body),
         });
-
+    const textConfidetional = document.createElement('div');
+    textConfidetional.style.cssText = 'font-size: 1.2rem; color: red; margin-top: 10px; margin-bottom: 10px';
     const statusMessage = document.createElement('div');
     statusMessage.style.cssText = 'font-size: 2rem; color: white; margin-top: 10px; margin-bottom: 10px';
 
@@ -66,8 +67,11 @@ const sendForm = () => {
         const validCheckBox = () => {
             if (inpCheckbox.checked) {
                 formBtn.removeAttribute('disabled');
+                textConfidetional.textContent = '';
             } else {
                 formBtn.setAttribute('disabled', 'disabled');
+                textConfidetional.textContent = 'необходимо подтвердить согласие!';
+                target.closest('form').appendChild(textConfidetional);
             }
             validation();
         };
