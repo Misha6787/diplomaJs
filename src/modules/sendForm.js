@@ -18,7 +18,7 @@ const sendForm = () => {
         background: url('http://hello-site.ru//main/images/preloads/tail-spin.svg') center center no-repeat;
         background-size: 22px;
     `;
-
+    let countError;
     const postData = body  =>
         fetch('server.php', {
             method: 'POST',
@@ -129,6 +129,23 @@ const sendForm = () => {
                     item.value = '';
                 }
             });
+            try {
+                const priceTotal = document.getElementById('price-total'),
+                    time = document.querySelector('.time'),
+                    tabs = time.querySelectorAll('input');
+                let total = priceTotal.textContent;
+
+                tabs.forEach(item => {
+                    if (item.checked) {
+                        total = 2999;
+                        total *= item.value;
+                        priceTotal.textContent = Math.floor(total);
+                    }
+                });
+            } catch {
+                // eslint-disable-next-line no-unused-vars
+                countError += 1;
+            }
         }
     });
 };

@@ -8,6 +8,9 @@ import openModalGift from './modules/openModalGift.js';
 import mainSlider from './modules/mainSlider.js';
 import sendForm from './modules/sendForm.js';
 import maskPhone from './modules/maskPhone.js';
+import calculate from './modules/calc.js';
+import SliderCarousel from './modules/sliderCarousel.js';
+// import photogallery from './modules/photogallery.js';
 let countError;
 
 chooseClub();
@@ -18,5 +21,30 @@ try {
     countError + 1;
 }
 mainSlider();
+const carousel = new SliderCarousel({
+    main: '.services-slider',
+    wrap: '.services-slider',
+    slidesToShow: 4,
+    infinity: true,
+    responsive: [{
+        breakpoint: 1024,
+        slidesToShow: 3
+    },
+    {
+        breakpoint: 768,
+        slidesToShow: 2
+    },
+    {
+        breakpoint: 576,
+        slidesToShow: 1
+    }]
+});
+carousel.init();
+// photogallery();
 maskPhone('phone');
+try {
+    calculate();
+} catch {
+    countError + 1;
+}
 sendForm();
