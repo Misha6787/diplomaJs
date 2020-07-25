@@ -8,9 +8,8 @@ const scrollToService = () => {
         document.body.clientWidth, document.documentElement.clientWidth
     );
     const menu = document.querySelector('.hidden-small'),
-        popupHamburgerMenu = document.querySelector('.popup-menu.hidden-large'),
-        html = document.querySelector('html');
-    console.log(html.id);
+        popupHamburgerMenu = document.querySelector('.popup-menu.hidden-large');
+        // html = document.querySelector('html');
     let count = 0;
     const scroolinterval = event => {
         const target = event.target;
@@ -18,7 +17,6 @@ const scrollToService = () => {
         const scroolPoint = document.documentElement.scrollTop;
         count += scroolPoint;
         let distanceToBlock;
-        // if (html)
         if (screenWidth() <= 320) {
             if (target.closest('[href="#clubs"]')) {
                 distanceToBlock = 720;
