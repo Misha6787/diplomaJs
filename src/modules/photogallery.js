@@ -3,13 +3,17 @@
 
 const photogallery = () => {
     const gallerySlider = document.querySelector('.gallery-slider'),
-        slides = gallerySlider.querySelectorAll('.slide');
+        slides = gallerySlider.querySelectorAll('.slide'),
+        galleryBg = document.querySelector('.gallery-bg .wrapper');
 
+    const dotBlock = document.createElement('div');
+    dotBlock.classList.add('block-dots');
+    gallerySlider.insertAdjacentElement('afterend', dotBlock);
     slides.forEach(() => {
         const dotItem = document.createElement('div');
         dotItem.classList.add('slider-dots');
-        // dotItem.innerHTML = `<li>`;
-        gallerySlider.insertAdjacentElement('afterend', dotItem);
+        dotItem.innerHTML = `<li><button></button></li>`;
+        dotBlock.insertAdjacentElement('afterbegin', dotItem);
     });
     slides[0].classList.add('slide-active');
     const addStyle = () => {
@@ -19,7 +23,31 @@ const photogallery = () => {
             style.id = 'photogallery-style';
         }
         style.textContent = `
-            .slider-dots-active {
+            .block-dots {
+                bottom: 20px;
+                width: 100%;
+                margin: 20px auto 0;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                flex-direction: row-reverse !important;
+                z-index: 99999;
+            }
+            .slider-dots li{
+                list-style-type: none !important;
+            }
+            .slider-dots {
+                position: relative !important;
+                display: inline-block !important;
+                position: absolute;
+                bottom: 80px !important;
+                left: 0 !important;
+            }
+            .slider-dots:last-child {
+                margin-left: 0 !important;
             }
             #gallery .gallery-slider {
                 height: 400px !important;
@@ -74,7 +102,8 @@ const photogallery = () => {
         gallerySlider.insertAdjacentElement('afterbegin', next);
     };
     addArrow();
-    const dot = document.querySelectorAll('.slider-dots');
+    const dot = document.querySelectorAll('.slider-dots li');
+    dot[0].classList.add('slick-active');
 
     let currentSlide = 0,
         interval;
@@ -83,13 +112,13 @@ const photogallery = () => {
 
     const autoPlaySlide = () => {
         prevSlide(slides, currentSlide, 'slide-active');
-        prevSlide(dot, currentSlide, 'slider-dots-active');
+        prevSlide(dot, currentSlide, 'slick-active');
         currentSlide++;
         if (currentSlide >= slides.length) {
             currentSlide = 0;
         }
         nextSlide(slides, currentSlide, 'slide-active');
-        nextSlide(dot, currentSlide, 'slider-dots-active');
+        nextSlide(dot, currentSlide, 'slick-active');
     };
     const startSlide = (time = 3000) => {
         interval = setInterval(autoPlaySlide, time);
@@ -97,22 +126,22 @@ const photogallery = () => {
     const stopSlide = () => {
         clearInterval(interval);
     };
-    gallerySlider.addEventListener('click', event => {
+    galleryBg.addEventListener('click', event => {
         event.preventDefault();
         const target = event.target;
         if (!target.closest('.slider-arrow, .slider-dots')) {
             return;
         }
         prevSlide(slides, currentSlide, 'slide-active');
-        prevSlide(dot, currentSlide, 'slider-dots-active');
+        prevSlide(dot, currentSlide, 'slick-active');
 
         if (target.closest('.slider-arrow.next')) {
             currentSlide++;
         } else if (target.closest('.slider-arrow.prev')) {
             currentSlide--;
-        } else if (target.matches('.slider-dots')) {
+        } else if (target.closest('.slider-dots li')) {
             dot.forEach((elem, index) => {
-                if (elem === target) {
+                if (elem.closest('li').children[0] === target) {
                     currentSlide = index;
                 }
             });
@@ -124,18 +153,18 @@ const photogallery = () => {
             currentSlide = slides.length - 1;
         }
         nextSlide(slides, currentSlide, 'slide-active');
-        nextSlide(dot, currentSlide, 'slider-dots-active');
+        nextSlide(dot, currentSlide, 'slick-active');
     });
 
-    gallerySlider.addEventListener('mouseover', event => {
+    galleryBg.addEventListener('mouseover', event => {
         if (event.target.closest('.slider-arrow') ||
-            event.target.matches('.slider-dots')) {
+            event.target.matches('button')) {
             stopSlide();
         }
     });
-    gallerySlider.addEventListener('mouseout', event => {
+    galleryBg.addEventListener('mouseout', event => {
         if (event.target.closest('.slider-arrow') ||
-            event.target.matches('.slider-dots')) {
+            event.target.matches('button')) {
             startSlide();
         }
     });
