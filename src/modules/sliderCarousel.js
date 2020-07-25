@@ -108,8 +108,6 @@ class SliderCarousel {
 
         this.main.insertAdjacentElement('afterend', this.prev);
         this.main.insertAdjacentElement('afterend', this.next);
-
-
     }
     responseInit() {
         const slidesToShowDefault = this.slidesToShow;

@@ -10,7 +10,10 @@ import sendForm from './modules/sendForm.js';
 import maskPhone from './modules/maskPhone.js';
 import calculate from './modules/calc.js';
 import SliderCarousel from './modules/sliderCarousel.js';
-// import photogallery from './modules/photogallery.js';
+import photogallery from './modules/photogallery.js';
+import arrowScrool from './modules/arrowScrool.js';
+import hamburger from './modules/hamburger.js';
+import scrollToService from './modules/scrollToService.js';
 let countError;
 
 chooseClub();
@@ -21,6 +24,9 @@ try {
     countError + 1;
 }
 mainSlider();
+scrollToService();
+arrowScrool();
+hamburger();
 const carousel = new SliderCarousel({
     main: '.services-slider',
     wrap: '.services-slider',
@@ -40,7 +46,7 @@ const carousel = new SliderCarousel({
     }]
 });
 carousel.init();
-// photogallery();
+photogallery();
 maskPhone('phone');
 try {
     calculate();
