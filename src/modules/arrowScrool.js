@@ -6,7 +6,7 @@ const addArrowToScroll = () => {
     totop.style.display = 'none';
     let count = 0;
     const addArrow = () => {
-        if (document.documentElement.scrollTop >= 250) {
+        if (document.documentElement.scrollTop >= 40) {
             totop.style.display = 'block';
         } else {
             totop.style.display = 'none';
