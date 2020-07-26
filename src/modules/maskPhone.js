@@ -38,6 +38,4 @@ const maskPhone = (selector, masked = '+7 (___) ___-__-__') => {
 
 };
 
-// use
 export default maskPhone;
-// maskPhone('селектор элементов', 'маска, если маску не передать то будет работать стандартная +7 (___) ___-__-__');
