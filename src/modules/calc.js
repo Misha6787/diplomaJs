@@ -12,14 +12,13 @@ const calculate = () => {
 
     const countTotal = () => priceTotal.textContent = Math.floor(total);
     const checkPromoCode = () => {
-        promoCode.value === 'ТЕЛО2020' ? total -= Math.floor(total / 30) : total = totalPrev;
+        promoCode.value === 'ТЕЛО2020' ? total -= Math.floor(total * 30 / 100) : total = totalPrev;
         countTotal();
     };
     const selectRadio = () => {
         tabs.forEach(item => {
             if (item.checked) {
-                total = 2999;
-                total *= item.value;
+                total = 2999 * item.value;
                 totalPrev = total;
                 checkPromoCode();
                 countTotal();
