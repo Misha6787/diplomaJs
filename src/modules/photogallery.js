@@ -157,14 +157,18 @@ const photogallery = () => {
     });
 
     galleryBg.addEventListener('mouseover', event => {
-        if (event.target.closest('.slider-arrow') ||
-            event.target.matches('button')) {
+        const target = event.target;
+        if (target.closest('.slide') ||
+            target.closest('.block-dots') ||
+            target.closest('.slider-arrow')) {
             stopSlide();
         }
     });
     galleryBg.addEventListener('mouseout', event => {
-        if (event.target.closest('.slider-arrow') ||
-            event.target.matches('button')) {
+        const target = event.target;
+        if (target.closest('.slide') ||
+            target.closest('.block-dots') ||
+            target.closest('.slider-arrow')) {
             startSlide();
         }
     });

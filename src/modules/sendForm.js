@@ -28,6 +28,8 @@ const sendForm = () => {
             },
             body: JSON.stringify(body),
         });
+    const inputErrorMessagePhone = document.createElement('div');
+    inputErrorMessagePhone.style.cssText = 'font-size: 1rem; color: red; margin-top: 10px; margin-bottom: 10px';
     const textConfidetional = document.createElement('div');
     textConfidetional.style.cssText = 'font-size: 1.2rem; color: red; margin-top: 10px; margin-bottom: 10px';
     const statusMessage = document.createElement('div');
@@ -42,12 +44,26 @@ const sendForm = () => {
         if (target.getAttribute('name') === 'name' &&
             target.getAttribute('placeholder') !== 'Промокод') {
             const item = target;
-            if (item.value.match(/^[?!,.а-яА-ЯёЁ0-9\s]+$/)) {
+            if (item.value.match(/^[а-яА-ЯёЁ\s]+$/)) {
                 item.style.border = '';
                 formBtn.removeAttribute('disabled');
             } else {
+                item.value = item.value.replace(/[@#$%^&*"№:;'=-_+/<>|(){}?!,.a-zA-Z0-9]{0,}/g, '');
+                item.style.border = '';
+                formBtn.removeAttribute('disabled');
+            }
+        }
+        if (target.getAttribute('name') === 'phone') {
+            const item = target;
+            if (item.value.length === 18) {
+                item.style.border = '';
+                formBtn.removeAttribute('disabled');
+                inputErrorMessagePhone.textContent = '';
+            } else {
                 item.style.border = '2px solid red';
                 formBtn.setAttribute('disabled', 'disabled');
+                inputErrorMessagePhone.textContent = 'Введите полный номер телефона!';
+                target.closest('form').insertAdjacentElement('beforeend', inputErrorMessagePhone);
             }
         }
         let inputs,
